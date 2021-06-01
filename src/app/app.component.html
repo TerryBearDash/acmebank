@@ -1,0 +1,30 @@
+<router-outlet></router-outlet>
+
+<ng-container *ngIf="modal">
+    <div class="modal fade" role="dialog" [ngClass]="{'show': modal}" [ngStyle]="{'display': modal ? 'block' : 'none'}">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">Withdrawl</h5>
+                    <button type="button" class="close" (click)="cancel()" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="m-0"><strong>
+                        {{ activeAccount.account_type === 'cheque' ? (activeAccount.balance === 0 ? 'Overdraft Balance' : 'Available Balance') :  'Available Balance' }}
+                    </strong></h6>
+                    <h3 class="mb-4"><strong>{{ activeAccount.account_type === 'cheque' ? (activeAccount.balance === 0 ? (500 | currency:'R':'symbol':'1.2-2') : activeAccount.balance | currency:'R':'symbol':'1.2-2') :  (activeAccount.balance | currency:'R':'symbol':'1.2-2') }}</strong></h3>
+                    <form>
+                        <div class="form-group">
+                            <input class="form-control" type="number" name="amount" [value]="amount" (input)="valueChange($event)" placeholder="Enter Amount" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" (click)="cancel()">cancel</button>
+                    <button class="btn btn-primary" type="button" [disabled]="!validateNumber()" (click)="withdraw()">withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade" [ngClass]="{'show': modal}" (click)="cancel()"></div>
+</ng-container>

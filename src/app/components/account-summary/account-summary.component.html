@@ -1,0 +1,34 @@
+<div class="table-responsive small">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Account Type</th>
+                <th>Account Number</th>
+                <th class="text-right">Balance</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let acc of accounts">
+                <tr [ngClass]="{'bg-light' : !api.checkDisabled(acc)}">
+                    <td (click)="setActive(acc)" class="pointer"><small class="capitalize">{{acc.account_type}}</small></td>
+                    <td (click)="setActive(acc)" class="pointer"><small>{{acc.account_number}}</small></td>
+                    <td class="text-right pointer" (click)="setActive(acc)"><small>{{acc.balance | currency:'R':'symbol':'1.2-2'}}</small></td>
+                    <td class="text-right pointer">
+                        <ng-container *ngIf="api.checkDisabled(acc)">
+                            <span class="badge badge-primary" (click)="openModal(acc)">Withdraw</span>
+                        </ng-container>
+                        <ng-container *ngIf="!api.checkDisabled(acc)">
+                            <ng-container *ngIf="acc.account_type === 'cheque'">
+                                <span class="badge badge-secondary" (click)="setActive(acc)">Settle Account</span>
+                            </ng-container>
+                            <ng-container *ngIf="acc.account_type === 'savings'">
+                                <span class="badge badge-muted">Limit Reached</span>
+                            </ng-container>
+                        </ng-container>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

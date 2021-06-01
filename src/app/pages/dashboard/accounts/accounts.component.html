@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h6 class="mb-0"><strong>Your Accounts</strong></h6>
+            <h3 class="mb-4"><strong>Balance {{balance | currency:'R':'symbol':'1.2-2'}}</strong></h3>
+            <app-account-summary></app-account-summary>
+        </div>
+        <div class="account-slide-out" [ngClass]="{'in': showdetail}">
+            <app-account-details></app-account-details>
+        </div>
+    </div>
+</div>
+<div class="slider-backdrop" (click)="setActive()" *ngIf="showdetail"></div>

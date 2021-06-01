@@ -1,0 +1,9 @@
+<div class="card text-dark bg-white border-primary mb-4" *ngIf="account || active_account">
+    <div class="card-body">
+        <img class="mb-3" src="assets/img/logo.png" height="40" />
+        <h5 class="card-title font-weight-bold mb-3">R {{active_account ? (active_account.balance | number: 2.0-2) : account.balance}}</h5>
+        <h6 class="text-muted card-subtitle mb-2">{{active_account? active_account.card_number : account.card_number}}</h6>
+        <p class="card-text">04/22</p>
+        <img class="card-logo" src="https://www.careersinafrica.com/wp-content/uploads/2016/01/visa_logo_blu.png" />
+    </div>
+</div>

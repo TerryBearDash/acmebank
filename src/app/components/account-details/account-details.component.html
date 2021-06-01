@@ -1,0 +1,29 @@
+<ng-container *ngIf="show">
+    <app-card></app-card>
+    <h3 class="mb-0 mt-3"><strong><span class="capitalize">{{account.account_type}}</span> Account</strong></h3>
+    <h6 class="mb-3 mt-0"><strong>{{account.account_number}}</strong></h6>
+    <ul class="list-group small">
+        <li class="list-group-item d-flex justify-content-between"><span>Balance</span><span class="font-weight-bold">{{account.balance | currency:'R':'symbol':'1.2-2'}}</span></li>
+        <ng-container *ngIf="account.account_type === 'cheque'">
+            <li class="list-group-item d-flex justify-content-between"><span>Overdraft Limit</span><span class="font-weight-bold">R 500.00</span></li>
+            <li class="list-group-item d-flex justify-content-between"><span>Overdraft Used</span><span class="font-weight-bold">{{(-500 - account.balance) | currency:'R':'symbol':'1.2-2'}}</span></li>
+        </ng-container>
+        <li class="list-group-item d-flex justify-content-between"><span>Currency</span><span class="font-weight-bold">ZAR</span></li>
+        <li class="list-group-item d-flex justify-content-between"><span>Status</span><span class="font-weight-bold text-success">
+            <ng-container *ngIf="trans.checkDisabled(account)">
+                Active
+            </ng-container>
+            <ng-container *ngIf="!trans.checkDisabled(account)">
+                Limit Reached
+            </ng-container>
+        </span></li>
+    </ul>
+    <ng-container *ngIf="trans.checkDisabled(account)">
+        <button class="btn btn-warning btn-block btn-lg mt-3" role="button" (click)="openModal()">make a withdrawl</button>
+    </ng-container>
+    <ng-container *ngIf="account.account_type === 'cheque'">
+        <ng-container *ngIf="!trans.checkDisabled(account)">
+            <button class="btn btn-outline-primary btn-block btn-lg mt-3" type="button" (click)="settleAccount(account)">settle account</button>
+        </ng-container>
+    </ng-container>
+</ng-container>

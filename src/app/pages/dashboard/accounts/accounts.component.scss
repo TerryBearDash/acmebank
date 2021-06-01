@@ -1,0 +1,25 @@
+.account-slide-out {
+    display: block;
+    position: fixed;
+    right: -300px;
+    top: 0;
+    bottom: 0;
+    background-color: #ffff;
+    width: 300px;
+    transition: all ease-in-out 0.3s;
+    z-index: 9999;
+    padding: 2em 1em;
+    &.in {
+        right: 0;
+        transition: all ease-in-out 0.3s;
+    }
+}
+
+.slider-backdrop {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}

@@ -1,0 +1,18 @@
+<div class="auth-box">
+    <img class="img-fluid mb-5" src="assets/img/logo.png" />
+    <h3 class="font-weight-bold">Login</h3>
+    <h6 class="mb-5 small">Enter your account information below to gain access to your account.</h6>
+    <form (ngSubmit)="login()">
+        <div class="form-group">
+            <input class="form-control" type="text" placeholder="Enter Account Number" name="account_number" [(ngModel)]="model.account_number" />
+            <span class="text-error" *ngIf="!model.account_number">**Account number is required.</span>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" placeholder="Enter Account Pin" name="pin_number" [(ngModel)]="model.pin">
+            <span class="text-error" *ngIf="!model.pin">**PIN is required.</span>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-outline-primary" type="submit" [disabled]="!model.account_number || !model.pin">Login</button>
+        </div>
+    </form>
+</div>
